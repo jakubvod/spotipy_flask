@@ -9,7 +9,7 @@ import os, random
 app = Flask(__name__)
 app.secret_key = os.urandom(64)
 
-#load_dotenv()
+load_dotenv()
 CLIENT_ID = os.environ.get("CLIENT_ID")
 CLIENT_SECRET = os.environ.get("CLIENT_SECRET")
 REDIRECT_URI = os.environ.get("REDIRECT_URI")
@@ -75,5 +75,4 @@ def get_stats():
     return render_template("get_stats.html", top_artists=top_artists_names, top_tracks=top_tracks_names, top_genres=genres_result)
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8888))
-    app.run(host="0.0.0.0", port=port)
+    app.run(port=8888)
