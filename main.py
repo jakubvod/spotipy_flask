@@ -9,7 +9,7 @@ import os, random
 app = Flask(__name__)
 app.secret_key = os.urandom(64)
 
-load_dotenv()
+#load_dotenv()
 CLIENT_ID = os.environ.get("CLIENT_ID")
 CLIENT_SECRET = os.environ.get("CLIENT_SECRET")
 REDIRECT_URI = os.environ.get("REDIRECT_URI")
