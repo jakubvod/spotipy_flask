@@ -74,4 +74,4 @@ def get_stats():
     return render_template("get_stats.html", top_artists=top_artists_names, top_tracks=top_tracks_names, top_genres=genres_result)
 
 if __name__ == "__main__":
-    app.run(port=8888)
+    app.run()
