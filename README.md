@@ -7,7 +7,7 @@ You can run this project in two ways: by downloading it as a ZIP file or by clon
 
 ## 🔧 Setup
 
-### 1. Create and activate a virtual environment (recommended)
+### 1. Create and activate a virtual environment in project's folder (recommended)
 - `python -m venv venv` 
 - Linux / macOS: `source venv/bin/activate`
 - Windows: `venv\Scripts\activate`
