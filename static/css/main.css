@@ -51,6 +51,17 @@ body {
 .fa-brands.fa-square-github.fa-2x:hover {
     color: hsl(0, 0%, 20%);
 }
+.artists_container li{
+    font-family:  "Open Sans";
+}
+.artists_container p{
+    font-family: "Open Sans";
+    font-weight: bold;
+}
+.artists_container {
+    display: flex;
+    gap: 50px;
+}
 
 @keyframes Glow {
     50%{box-shadow: 0px 0px 5px black;}

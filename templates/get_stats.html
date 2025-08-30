@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %} Get Stats {% endblock %}
+{% block content %} 
+    <br>
+    <div class="artists_container">
+        <div>
+            {% if  top_artists|length == 0 %}
+                <p> No top artists found! </p>
+            {% else %}
+            <p> Top artists past 1 month: </p>
+                <ol>
+                {% for i in range(top_artists|length) %}
+                    <li> {{ top_artists[i] }} </li>
+                {% endfor %}
+                </ol>
+            {% endif %}
+        </div>
+        <div>
+            {% if  top_tracks|length == 0 %}
+                <p> No top artists found! </p>
+            {% else %}
+            <p> Top tracks past 1 month: </p>
+                <ol>
+                {% for i in range(top_tracks|length) %}
+                    <li> {{ top_tracks[i] }} </li>
+                {% endfor %}
+                </ol>
+            {% endif %}
+        </div>
+        <div>
+            {% if  top_genres|length == 0 %}
+                <p> No top genres found! </p>
+            {% else %}
+            <p> Top genres past 1 month: </p>
+                <ol>
+                {% for i in range(top_genres|length) %}
+                    <li> {{ top_genres[i] }} </li>
+                {% endfor %}
+                </ol>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}
