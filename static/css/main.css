@@ -28,9 +28,6 @@ body {
 
 .action-button:hover{
     background-color: hsl(141, 73%, 38%);
-}
-
-.action-button:hover{
     animation: Glow;
     animation-duration: 2s;
     animation-iteration-count: infinite;

@@ -46,21 +46,32 @@ def callback():
 def get_stats():
     if not oauth.validate_token(cache_handler.get_cached_token()):
         return redirect(oauth.get_authorize_url())
+    
+    if 'top_artists_names' in session and 'top_tracks_names' in session and 'genres_result' in session:
+        top_artists_names = session['top_artists_names']
+        top_tracks_names = session['top_tracks_names']
+        genres_result = session['genres_result']
 
-    top_artists = sp.current_user_top_artists(limit=30, time_range='short_term')["items"]
-    top_tracks = sp.current_user_top_tracks(limit=30, time_range='short_term')["items"]
+    else:
+        top_artists = sp.current_user_top_artists(limit=30, time_range='short_term')["items"]
+        top_tracks = sp.current_user_top_tracks(limit=30, time_range='short_term')["items"]
 
-    if len(top_artists) != 0 and len(top_tracks) != 0:
-        top_artists_names = [top_artist["name"] for top_artist in top_artists]
-        top_tracks_names = [top_track["name"] for top_track in top_tracks]
+        if len(top_artists) != 0 and len(top_tracks) != 0:
+            top_artists_names = [top_artist["name"] for top_artist in top_artists]
+            top_tracks_names = [top_track["name"] for top_track in top_tracks]
 
-        genres_counter: dict[str, int] = {}
-        for top_artist in top_artists:
-            for genre in top_artist["genres"]:
-                genres_counter[genre] = genres_counter.get(genre, 0) + 1
-        genres_counter = Counter(genres_counter)
-        top_5_genres = genres_counter.most_common(5)
-        genres_result = [genre for genre, count in top_5_genres]
+            genres_counter: dict[str, int] = {}
+            for top_artist in top_artists:
+                for genre in top_artist["genres"]:
+                    genres_counter[genre] = genres_counter.get(genre, 0) + 1
+            genres_counter = Counter(genres_counter)
+            top_5_genres = genres_counter.most_common(5)
+            genres_result = [genre for genre, count in top_5_genres]
+
+            session['top_artists_names'] = top_artists_names
+            session['top_tracks_names'] = top_tracks_names
+            session['genres_result'] = genres_result
+
     return render_template("get_stats.html", top_artists=top_artists_names, top_tracks=top_tracks_names, top_genres=genres_result)
 
 if __name__ == "__main__":
