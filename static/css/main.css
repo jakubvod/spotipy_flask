@@ -36,7 +36,6 @@ body {
     animation-iteration-count: infinite;
 }
 
-
 #welcome-text {
     font-family: "Open Sans";
     padding: 5px;
@@ -46,7 +45,12 @@ body {
 .fa-brands.fa-spotify.fa-10x {
     transform: translateY(-50px);
 }
-
+.fa-brands.fa-square-github.fa-2x {
+    color: hsl(0, 0%, 30%);
+}
+.fa-brands.fa-square-github.fa-2x:hover {
+    color: hsl(0, 0%, 20%);
+}
 
 @keyframes Glow {
     50%{box-shadow: 0px 0px 5px black;}

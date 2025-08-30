@@ -11,7 +11,7 @@ def home():
 
 @app.route("/auth")
 def auth():
-    return "DONE!"
+    return render_template("auth.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
