@@ -26,3 +26,7 @@ REDIRECT_URI = 'http://localhost:8888/callback'
 # 5. Start the app
 - Run `main.py`
 - The website will be available at http://localhost:8888
+
+## 🖼️ Images
+<img width="1906" height="1064" alt="Image" src="https://github.com/user-attachments/assets/de0cdc84-8a09-4d2d-a769-081c58eef0dc" />
+<img width="1917" height="906" alt="Image" src="https://github.com/user-attachments/assets/6f4424d5-0e3f-46d9-accb-97c5c288574f" />
