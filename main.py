@@ -38,6 +38,7 @@ def auth():
 
 @app.route("/callback")
 def callback():
+   session.clear()
    oauth.get_access_token(request.args['code'])
    return redirect(url_for('get_stats'))
 
