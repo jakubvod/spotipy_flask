@@ -3,17 +3,20 @@ Flask version of my Spotipy script.
 
 ## 🚀 Getting Started
 
-You can run this project in two ways: by downloading it as a ZIP file or by cloning the repository.
+You can run this project by downloading it as a ZIP file or by cloning the repository.
 
 ## 🔧 Setup
 
-### 1. Create and activate a virtual environment in project's folder (recommended)
-- `python -m venv venv` 
+### 1. (Recommended) Create and activate a virtual environment
+- `python -m venv venv`
 - Linux / macOS: `source venv/bin/activate`
 - Windows: `venv\Scripts\activate`
 
+> ⚠️ If you prefer not to use a virtual environment, you can install dependencies globally using `python -m pip install -r requirements.txt`.
+
 ### 2. Install dependencies
-- `pip install -r requirements.txt` (or `python -m pip install -r requirements.txt` if not working correctly)
+- Inside the virtual environment: `pip install -r requirements.txt`  
+- Or globally: `python -m pip install -r requirements.txt` (especially on Windows if `pip install` fails)
 
 ### 3. Create a `.env` file with the following format:
 ```
