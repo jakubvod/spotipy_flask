@@ -13,7 +13,7 @@ You can run this project in two ways: by downloading it as a ZIP file or by clon
 - Windows: `venv\Scripts\activate`
 
 ### 2. Install dependencies
-- `pip install -r requirements.txt`
+- `pip install -r requirements.txt` (or `python -m pip install -r requirements.txt` if not working correctly)
 
 ### 3. Create a `.env` file with the following format:
 ```
