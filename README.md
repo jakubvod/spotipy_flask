@@ -5,7 +5,7 @@ Flask version of my Spotipy script.
 
 You can run this project in two ways: by downloading it as a ZIP file or by cloning the repository.
 
-## 🔧 Setup (without using the link)
+## 🔧 Setup
 
 ### 1. Create and activate a virtual environment (recommended)
 - `python -m venv venv` 
@@ -21,4 +21,8 @@ CLIENT_ID = 'xxxxxxxxx'
 CLIENT_SECRET = 'xxxxxxxxx'
 REDIRECT_URI = 'http://localhost:8888/callback'
 ```
-# 4. Get your ID and SECRET from [Spotify's Dashboard](https://developer.spotify.com/dashboard) (you need to create an app) and replace the xxxxxxxxx values with your credentials.
+# 4. Get your ID and SECRET from [Spotify's Dashboard](https://developer.spotify.com/dashboard)
+- (you need to create an app) and replace the xxxxxxxxx values with your credentials.
+# 5. Start the app
+- Run `main.py`
+- The website will be available at http://localhost:8888
