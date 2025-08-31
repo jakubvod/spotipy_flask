@@ -1,5 +1,9 @@
 ## spotipy_flask
-Flask version of my Spotipy script.
+Flask app (CRUD) project, built with Flask, Spotipy, SQLAlchemy.
+
+## 🔧 Features
+- See your Spotify stats past 1 month.
+- Create account with your favourite album and see other's favourite albums.
 
 ## 🚀 Getting Started
 
