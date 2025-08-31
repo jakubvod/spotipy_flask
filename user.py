@@ -30,6 +30,7 @@ def login():
 @user_blueprint.route("/user", methods=["POST", "GET"])
 def user():
     if "user" not in session:
+        flash("Login first!")
         return redirect(url_for("user.login"))
     
     found_user = User.query.filter_by(name=session["user"]).first()

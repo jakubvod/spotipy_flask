@@ -60,6 +60,30 @@ body {
     gap: 50px;
 }
 
+.flash_container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.flash_container p{
+    font-family: "Open Sans";
+    font-size: 1.5em;
+}
+
+.page_form_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.page_form p {
+    font-family: "Open Sans";
+    font-size: 2em;
+}
+
 @keyframes Glow {
     50%{box-shadow: 0px 0px 5px black;}
 }

@@ -1,18 +1,24 @@
 {% extends "base.html" %}
 {% block title %} Login Page {% endblock %}
 {% block content %}
-    <!-- flash messages -->
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for msg in messages %}
-                    <p>{{msg}}</p>
-                {% endfor %}
-            {% endif %}
-        {% endwith %} 
 
-    <form action="{{ url_for('user.login') }}" method="post"> 
-        <p>Name:</p>
-        <p><input type="text" placeholder="John" name="name"/></p>
-        <p><input type="submit" value="Submit"/></p>
-    </form>
+    <div class="page_form_container">
+        <div class="page_form">
+            <form action="{{ url_for('user.login') }}" method="post"> 
+                <p>Name:</p>
+                <p><input type="text" placeholder="John" name="name"/></p>
+                <p><input type="submit" value="Submit"/></p>
+            </form>
+        </div>
+        <div class="flash_container">
+        <!-- flash messages -->
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for msg in messages %}
+                        <p>{{msg}}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %} 
+        </div>
+    </div>
 {% endblock %}
