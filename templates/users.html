@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %} Users Page {% endblock %}
+{% block content %}
+    {% for user in user_list %}
+        <p> <b> Name: </b> {{ user.name }}, <b> Favorite album: </b> {{ user.album }} </p>
+    {% endfor %}
+{% endblock %}
