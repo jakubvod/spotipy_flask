@@ -1,5 +1,23 @@
 {% extends "base.html" %}
 {% block title %} User Page {% endblock %}
 {% block content %}
-    <p> Done! </p>
+    <!-- flash messages -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for msg in messages %}
+                    <p>{{msg}}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %} 
+
+    <form action="{{ url_for('user.user') }}" method="post"> 
+        <p> Welcome, {{ user.name }}! </p>
+        <p> Your favorite album:</p>
+        <p><input type="text" placeholder="{{ user.album }}" name="album"/></p>
+        <p>
+            <input type="submit" name="action" value="Change"/>
+            <input type="submit" name="action" value="Delete"/>
+        </p>
+        <p> <input type="submit" name="action" value="Delete account"/> </p>
+    </form>
 {% endblock %}

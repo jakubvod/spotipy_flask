@@ -27,11 +27,30 @@ def login():
         return redirect(url_for("user.user"))
     return render_template("login.html")
 
-@user_blueprint.route("/user")
+@user_blueprint.route("/user", methods=["POST", "GET"])
 def user():
     if "user" not in session:
         return redirect(url_for("user.login"))
-    return render_template("user.html")
+    
+    found_user = User.query.filter_by(name=session["user"]).first()
+
+    if request.method == "POST":
+        if request.form.get("action") == "Change":
+            album = request.form["album"]
+            found_user.album = album
+            db.session.commit()
+            flash("Favourite album changed!")
+        elif request.form.get("action") == "Delete":
+            found_user.album = ""
+            db.session.commit()
+            flash("Favourite album removed!")
+        else: # Delete account
+            db.session.delete(found_user)
+            db.session.commit()
+            session.pop("user", None)
+            flash("User account deleted!")
+            return redirect(url_for("user.login"))
+    return render_template("user.html", user=found_user)
 
 @user_blueprint.route("/logout")
 def logout():
