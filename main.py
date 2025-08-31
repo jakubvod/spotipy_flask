@@ -5,9 +5,12 @@ from spotipy.oauth2 import SpotifyOAuth
 from spotipy.cache_handler import FlaskSessionCacheHandler
 from dotenv import load_dotenv
 import os, random
+from model import db, User
+from user import user_blueprint
 
 app = Flask(__name__)
 app.secret_key = os.urandom(64)
+app.register_blueprint(user_blueprint, url_prefix="")
 
 load_dotenv()
 CLIENT_ID = os.environ.get("CLIENT_ID")
