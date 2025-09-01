@@ -1,4 +1,4 @@
-## spotipy_flask
+## spotipy_flask (NOT WORKING CORRECTLY ON MOBILES)
 Flask app (CRUD) project, built with Flask, Spotipy, SQLAlchemy.
 
 ## 🔧 Features
