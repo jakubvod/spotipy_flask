@@ -14,10 +14,6 @@ app.secret_key = os.urandom(64)
 app.register_blueprint(user_blueprint, url_prefix="")
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.sqlite3'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
-app.config['SESSION_COOKIE_SECURE'] = True
-app.config['SESSION_PERMANENT'] = True
-app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=5)
 
 db.init_app(app)
 with app.app_context():
@@ -46,7 +42,6 @@ def home():
 
 @app.route("/auth")
 def auth():
-    session.permanent = True    
     token = cache_handler.get_cached_token()
     if not token or not oauth.validate_token(token):
         return redirect(oauth.get_authorize_url())
@@ -54,7 +49,6 @@ def auth():
 
 @app.route("/callback")
 def callback():
-   session.permanent = True     
    session.clear()
    token = oauth.get_access_token(request.args['code'])
    cache_handler.save_token_to_cache(token)
@@ -62,7 +56,6 @@ def callback():
 
 @app.route("/get_stats")
 def get_stats():
-    session.permanent = True    
     token = cache_handler.get_cached_token()
     if not token or not oauth.validate_token(token):
         return redirect(oauth.get_authorize_url())
