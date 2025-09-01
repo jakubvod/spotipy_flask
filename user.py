@@ -36,12 +36,13 @@ def user():
     found_user = User.query.filter_by(name=session["user"]).first()
 
     if request.method == "POST":
-        if request.form.get("action") == "Change":
+        clicked_button = request.form.get("action")
+        if clicked_button == "Change":
             album = request.form["album"]
             found_user.album = album
             db.session.commit()
             flash("Favourite album changed!")
-        elif request.form.get("action") == "Delete":
+        elif clicked_button == "Delete":
             found_user.album = ""
             db.session.commit()
             flash("Favourite album removed!")
