@@ -41,20 +41,25 @@ def home():
 
 @app.route("/auth")
 def auth():
-    if not oauth.validate_token(cache_handler.get_cached_token()):
+    token = cache_handler.get_cached_token()
+    if not token or not oauth.validate_token(token):
         return redirect(oauth.get_authorize_url())
     return redirect(url_for('get_stats'))
 
 @app.route("/callback")
 def callback():
    session.clear()
-   oauth.get_access_token(request.args['code'])
+   token = oauth.get_access_token(request.args['code'])
+   cache_handler.save_token_to_cache(token)
    return redirect(url_for('get_stats'))
 
 @app.route("/get_stats")
 def get_stats():
-    if not oauth.validate_token(cache_handler.get_cached_token()):
+    token = cache_handler.get_cached_token()
+    if not token or not oauth.validate_token(token):
         return redirect(oauth.get_authorize_url())
+    
+    sp = Spotify(auth=token['access_token'])
     
     if 'top_artists_names' in session and 'top_tracks_names' in session and 'genres_result' in session:
         top_artists_names = session['top_artists_names']
