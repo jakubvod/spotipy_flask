@@ -15,6 +15,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.sqlite3'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
+with app.app_context():
+        db.create_all()
 
 load_dotenv()
 CLIENT_ID = os.environ.get("CLIENT_ID")
@@ -82,6 +84,4 @@ def get_stats():
     return render_template("get_stats.html", top_artists=top_artists_names, top_tracks=top_tracks_names, top_genres=genres_result)
 
 if __name__ == "__main__":
-    with app.app_context():
-        db.create_all()
     app.run()
