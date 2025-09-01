@@ -16,7 +16,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
 
-load_dotenv()
 CLIENT_ID = os.environ.get("CLIENT_ID")
 CLIENT_SECRET = os.environ.get("CLIENT_SECRET")
 REDIRECT_URI = os.environ.get("REDIRECT_URI")
@@ -84,4 +83,4 @@ def get_stats():
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
-    app.run(port=8888)
+    app.run()
