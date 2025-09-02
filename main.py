@@ -7,7 +7,6 @@ from dotenv import load_dotenv
 import os, random
 from model import db, User
 from user import user_blueprint
-from datetime import timedelta
 import secrets
 from spotipy.exceptions import SpotifyException
 
