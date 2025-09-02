@@ -9,6 +9,7 @@ from model import db, User
 from user import user_blueprint
 from datetime import timedelta
 import secrets
+from spotipy.exceptions import SpotifyException
 
 app = Flask(__name__)
 app.secret_key = os.urandom(64)
@@ -85,14 +86,13 @@ def get_stats():
         top_tracks_names = session['top_tracks_names']
         genres_result = session['genres_result']
 
-    profile = sp.current_user()
-    if profile["product"] != "premium":
-        flash("You need Spotify Premium!")
-        return redirect(url_for("home"))
-
     else:
-        top_artists = sp.current_user_top_artists(limit=30, time_range='short_term')["items"]
-        top_tracks = sp.current_user_top_tracks(limit=30, time_range='short_term')["items"]
+        try:
+            top_artists = sp.current_user_top_artists(limit=30, time_range='short_term')["items"]
+            top_tracks = sp.current_user_top_tracks(limit=30, time_range='short_term')["items"]
+        except SpotifyException:
+            flash("Error getting your top artist, make sure you have Spotify Premium!")
+            return render_template("home.html")
 
         if len(top_artists) != 0 and len(top_tracks) != 0:
             top_artists_names = [top_artist["name"] for top_artist in top_artists]
