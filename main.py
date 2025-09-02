@@ -86,8 +86,11 @@ def get_stats():
         genres_result = session['genres_result']
 
     else:
-        top_artists = sp.current_user_top_artists(limit=30, time_range='short_term')["items"]
-        top_tracks = sp.current_user_top_tracks(limit=30, time_range='short_term')["items"]
+        try:
+            top_artists = sp.current_user_top_artists(limit=30, time_range='short_term')["items"]
+            top_tracks = sp.current_user_top_tracks(limit=30, time_range='short_term')["items"]
+        except:
+            return "Couldn't get your stats! Make sure you have Spotify Premium"
 
         if len(top_artists) != 0 and len(top_tracks) != 0:
             top_artists_names = [top_artist["name"] for top_artist in top_artists]
