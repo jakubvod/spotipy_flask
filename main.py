@@ -68,7 +68,7 @@ def callback():
 def get_stats():
     token = cache_handler.get_cached_token()
     if not token or not oauth.validate_token(token):
-        return redirect(oauth.get_authorize_url())
+        return redirect(url_for('auth'))
     
     sp = Spotify(auth=token['access_token'])
     
