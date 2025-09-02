@@ -56,11 +56,11 @@ def callback():
        flash("Authorization failed!")
        return redirect(url_for('home'))
 
-   state = request.args.get["state"]
+   state = request.args.get("state")
    if not state or state != session.get("oauth_state"):
        return "Invalid state", 400
 
-   token = oauth.get_access_token(request.args["code"])
+   token = oauth.get_access_token(request.args.get("code"))
    cache_handler.save_token_to_cache(token)
    return redirect(url_for('get_stats'))
 
