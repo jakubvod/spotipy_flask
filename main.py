@@ -44,10 +44,10 @@ def home():
 @app.route("/auth")
 def auth():
     token = cache_handler.get_cached_token()
-    print("DEBUG: token from cache_handler:", token)
-    print("DEBUG: session keys:", session.keys())
+    #print("DEBUG: token from cache_handler:", token)
+    #print("DEBUG: session keys:", session.keys())
     if not token or not oauth.validate_token(token):
-        print("DEBUG: No valid token, redirecting to /auth")
+        #print("DEBUG: No valid token, redirecting to /auth")
         state = secrets.token_urlsafe(16)
         session["oauth_state"] = state
         return redirect(oauth.get_authorize_url(state=state))
@@ -55,20 +55,20 @@ def auth():
 
 @app.route("/callback")
 def callback():
-   print("DEBUG: request.args:", request.args)
+   #print("DEBUG: request.args:", request.args)
    if "error" in request.args:
        flash("Authorization failed!")
        return redirect(url_for('home'))
 
    state = request.args.get("state")
-   print("DEBUG: received state:", state)
-   print("DEBUG: session oauth_state:", session.get("oauth_state"))
+   #print("DEBUG: received state:", state)
+   #print("DEBUG: session oauth_state:", session.get("oauth_state"))
    if not state or state != session.get("oauth_state"):
        print("DEBUG: Invalid state")
        return "Invalid state", 400
 
    token = oauth.get_access_token(request.args.get("code"))
-   print("DEBUG: obtained token:", token)
+   #print("DEBUG: obtained token:", token)
    cache_handler.save_token_to_cache(token)
    return redirect(url_for('get_stats'))
 
