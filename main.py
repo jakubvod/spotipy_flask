@@ -50,6 +50,10 @@ def auth():
 @app.route("/callback")
 def callback():
    session.clear()
+
+   if "error" in request.args:
+       flash("Authorization failed!")
+       return redirect(url_for('home'))
    token = oauth.get_access_token(request.args['code'])
    cache_handler.save_token_to_cache(token)
    return redirect(url_for('get_stats'))
