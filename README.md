@@ -10,7 +10,7 @@ Flask app (CRUD) project, built with Flask, Spotipy, SQLAlchemy.
 You can run this project by:
 1. Downloading it as a ZIP file
 2. Cloning the repository
-3. Running the app on a server: spotipy-flask.onrender.com
+3. Running the app on a server: https://spotipy-flask.onrender.com
 > ⚠️ Note: The Spotify app is currently in **development mode**. Only users added as testers in the Spotify Dashboard can access Spotify stats.
 
 ## 🔧 Setup
