@@ -40,5 +40,8 @@ REDIRECT_URI = 'http://localhost:8888/callback'
 - The website will be available at http://localhost:8888
 
 ## 🖼️ Images
-<img width="1906" height="1064" alt="Image" src="https://github.com/user-attachments/assets/de0cdc84-8a09-4d2d-a769-081c58eef0dc" />
-<img width="1917" height="906" alt="Image" src="https://github.com/user-attachments/assets/6f4424d5-0e3f-46d9-accb-97c5c288574f" />
+<img width="1900" height="1061" alt="Image" src="https://github.com/user-attachments/assets/4b813b2a-2733-414a-bf78-bc159c2c4248" />
+<img width="1919" height="1058" alt="Image" src="https://github.com/user-attachments/assets/675d9f19-cde7-4da8-86ce-96c4d89dc7c1" />
+<img width="1903" height="1061" alt="Image" src="https://github.com/user-attachments/assets/6aced82e-9540-4cfe-b53b-dfc0df786b6c" />
+<img width="1900" height="1061" alt="Image" src="https://github.com/user-attachments/assets/ca414429-418e-4bc5-84c5-7d77e6e58929" />
+<img width="1920" height="1062" alt="Image" src="https://github.com/user-attachments/assets/709ff3fb-25df-4323-b400-d000d2f323cf" />
