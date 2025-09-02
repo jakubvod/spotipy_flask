@@ -91,8 +91,7 @@ def get_stats():
             top_artists = sp.current_user_top_artists(limit=30, time_range='short_term')["items"]
             top_tracks = sp.current_user_top_tracks(limit=30, time_range='short_term')["items"]
         except SpotifyException:
-            flash("Error getting your top artist, make sure you have Spotify Premium!")
-            return render_template("home.html")
+            return "Error getting your top artist, make sure you have Spotify Premium!"
 
         if len(top_artists) != 0 and len(top_tracks) != 0:
             top_artists_names = [top_artist["name"] for top_artist in top_artists]
