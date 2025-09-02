@@ -34,6 +34,7 @@ REDIRECT_URI = 'http://localhost:8888/callback'
 ```
 ### 4. Get your ID and SECRET from [Spotify's Dashboard](https://developer.spotify.com/dashboard)
 - (you need to create an app) and replace the xxxxxxxxx values with your credentials.
+- You also need to set up the Redirect URI (use the same one as mentioned above)
 ### 5. Start the app
 - Change `app.run()` to `app.run(port=8888)` in main.
 - Run `main.py`
