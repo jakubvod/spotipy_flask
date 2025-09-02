@@ -8,6 +8,7 @@ import os, random
 from model import db, User
 from user import user_blueprint
 from datetime import timedelta
+import secrets
 
 app = Flask(__name__)
 app.secret_key = os.urandom(64)
@@ -44,7 +45,9 @@ def home():
 def auth():
     token = cache_handler.get_cached_token()
     if not token or not oauth.validate_token(token):
-        return redirect(oauth.get_authorize_url())
+        state = secrets.token_urlsafe(16)
+        session["oauth_state"] = state
+        return redirect(oauth.get_authorize_url(state=state))
     return redirect(url_for('get_stats'))
 
 @app.route("/callback")
@@ -54,7 +57,12 @@ def callback():
    if "error" in request.args:
        flash("Authorization failed!")
        return redirect(url_for('home'))
-   token = oauth.get_access_token(request.args['code'])
+
+   state = request.args.get("state")
+   if not state or state != session.get("oauth_state"):
+       return "Invalid state", 400
+
+   token = oauth.get_access_token(request.args("code"))
    cache_handler.save_token_to_cache(token)
    return redirect(url_for('get_stats'))
 
