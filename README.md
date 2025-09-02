@@ -2,12 +2,16 @@
 Flask app (CRUD) project, built with Flask, Spotipy, SQLAlchemy.
 
 ## 🔧 Features
-- See your Spotify stats past 1 month.
+- See your Spotify stats past 1 month (no premium required).
 - Create account with your favourite album and see other's favourite albums.
 
 ## 🚀 Getting Started
 
-You can run this project by downloading it as a ZIP file or by cloning the repository.
+You can run this project by:
+1. Downloading it as a ZIP file
+2. Cloning the repository
+3. Running the app on a server: spotipy-flask.onrender.com
+> ⚠️ Note: The Spotify app is currently in **development mode**. Only users added as testers in the Spotify Dashboard can access Spotify stats.
 
 ## 🔧 Setup
 
@@ -31,6 +35,7 @@ REDIRECT_URI = 'http://localhost:8888/callback'
 # 4. Get your ID and SECRET from [Spotify's Dashboard](https://developer.spotify.com/dashboard)
 - (you need to create an app) and replace the xxxxxxxxx values with your credentials.
 # 5. Start the app
+- Change `app.run()` to `app.run(port=8888)` in main.
 - Run `main.py`
 - The website will be available at http://localhost:8888
 
