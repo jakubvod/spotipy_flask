@@ -7,6 +7,9 @@ from dotenv import load_dotenv
 import os, random
 from model import db, User
 from user import user_blueprint
+from datetime import timedelta
+import secrets
+from spotipy.exceptions import SpotifyException
 
 app = Flask(__name__)
 app.secret_key = os.urandom(64)
@@ -15,6 +18,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.sqlite3'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
+with app.app_context():
+        db.create_all()
 
 load_dotenv()
 CLIENT_ID = os.environ.get("CLIENT_ID")
@@ -39,20 +44,42 @@ def home():
 
 @app.route("/auth")
 def auth():
-    if not oauth.validate_token(cache_handler.get_cached_token()):
-        return redirect(oauth.get_authorize_url())
+    token = cache_handler.get_cached_token()
+    print("DEBUG: token from cache_handler:", token)
+    print("DEBUG: session keys:", session.keys())
+    if not token or not oauth.validate_token(token):
+        print("DEBUG: No valid token, redirecting to /auth")
+        state = secrets.token_urlsafe(16)
+        session["oauth_state"] = state
+        return redirect(oauth.get_authorize_url(state=state))
     return redirect(url_for('get_stats'))
 
 @app.route("/callback")
 def callback():
-   session.clear()
-   oauth.get_access_token(request.args['code'])
+   print("DEBUG: request.args:", request.args)
+   if "error" in request.args:
+       flash("Authorization failed!")
+       return redirect(url_for('home'))
+
+   state = request.args.get("state")
+   print("DEBUG: received state:", state)
+   print("DEBUG: session oauth_state:", session.get("oauth_state"))
+   if not state or state != session.get("oauth_state"):
+       print("DEBUG: Invalid state")
+       return "Invalid state", 400
+
+   token = oauth.get_access_token(request.args.get("code"))
+   print("DEBUG: obtained token:", token)
+   cache_handler.save_token_to_cache(token)
    return redirect(url_for('get_stats'))
 
 @app.route("/get_stats")
 def get_stats():
-    if not oauth.validate_token(cache_handler.get_cached_token()):
-        return redirect(oauth.get_authorize_url())
+    token = cache_handler.get_cached_token()
+    if not token or not oauth.validate_token(token):
+        return redirect(url_for('auth'))
+    
+    sp = Spotify(auth=token['access_token'])
     
     if 'top_artists_names' in session and 'top_tracks_names' in session and 'genres_result' in session:
         top_artists_names = session['top_artists_names']
@@ -60,8 +87,11 @@ def get_stats():
         genres_result = session['genres_result']
 
     else:
-        top_artists = sp.current_user_top_artists(limit=30, time_range='short_term')["items"]
-        top_tracks = sp.current_user_top_tracks(limit=30, time_range='short_term')["items"]
+        try:
+            top_artists = sp.current_user_top_artists(limit=30, time_range='short_term')["items"]
+            top_tracks = sp.current_user_top_tracks(limit=30, time_range='short_term')["items"]
+        except SpotifyException:
+            return "This app is currently in development mode. Only authorized Spotify test users can use it."
 
         if len(top_artists) != 0 and len(top_tracks) != 0:
             top_artists_names = [top_artist["name"] for top_artist in top_artists]
@@ -82,6 +112,4 @@ def get_stats():
     return render_template("get_stats.html", top_artists=top_artists_names, top_tracks=top_tracks_names, top_genres=genres_result)
 
 if __name__ == "__main__":
-    with app.app_context():
-        db.create_all()
-    app.run(port=8888)
+    app.run()
